@@ -35,7 +35,7 @@ def map_data_prep(region):
     # data_url='https://firms.modaps.eosdis.nasa.gov/api/area/csv/' + MAP_KEY + '/MODIS_NRT/world/1'
 
     data_from_db=GetDataFromDb()
-    data_json=parse_json(data_from_db)
+    data_json=parse_json_2(data_from_db)
     data=pd.read_json(data_json)
 
 
