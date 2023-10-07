@@ -3,7 +3,7 @@ from pymongo.mongo_client import MongoClient
 import requests
 import json
 from bson import ObjectId
-
+'''
 
 
 Database = Flask(__name__)
@@ -14,6 +14,8 @@ uri = "mongodb+srv://NEjjjO:fuckyou69@shoby0.bcrmqu3.mongodb.net/?retryWrites=tr
 client = MongoClient(uri)
 
 db = client.Mindenis
+
+
 
 
 fire = db.Minden
@@ -30,3 +32,4 @@ def GetDataFromDb():
         list.append(fires)
     return list
 
+'''
