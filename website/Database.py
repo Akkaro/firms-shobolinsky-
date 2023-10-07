@@ -13,14 +13,16 @@ uri = "mongodb+srv://NEjjjO:fuckyou69@shoby0.bcrmqu3.mongodb.net/?retryWrites=tr
 
 client = MongoClient(uri)
 
-db = client.Mindenis
+
+data = client.Mindenis
 
 
-fire = db.Minden
 
-fire_kicsi = db.Minden #rovid
+fire = data.Minden
 
-fire = db.EarthData24H
+fire_kicsi = data.Minden #rovid
+
+fire = data.EarthData24H
 
 
 
