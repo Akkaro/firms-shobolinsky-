@@ -1,5 +1,56 @@
 {% extends "base.html" %} {% block title%}Home{% endblock %}
 {% block content %}
-<img src="firms-shobolinsky-\static\valami.jpg">
+<style>
+ 
+ .scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
+  .card {
+    display: inline-block;
+    width: 100%; height: 400px; left: 0px; background: #070B0C; box-shadow: 0px 0px 0px; border-radius: 100px; 
+    opacity: 80%;
+  }
+  
+}
+.text-custom{
+    width: 455px; height: 61px; left: -9px; top: 100px;
+    color: white; font-size: 40px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word
+
+  }
+.text-custom-card{
+    width: 455px; height: 61px; left: 0px; top: 100px;
+    color: white; font-size: 30px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word
+
+}
+.did-you-know{
+   left: 30%; top: 30px; position: relative; color:#ffffff;; font-size: 70px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word
+}
+.basic-text-style{
+text-align: center;
+padding: 70px 0;
+}
+
+</style>
+
+
+
+<h2 class = "text-custom">Welcome to our website!</h2>
+<div class="scrolling-wrapper">
+    <div class="card"><p class = "did-you-know" >Did you know?</p>
+        <div class="basic-text-style "><span style="color: white; font-size: 40px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word">In 2021 we lost </span><span style="color: #BACF12; font-size: 60px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word">9.3 million hectares <br/>of tree cover</span><span style="color: #505F0C; font-size: 60px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word"> </span><span style="color: white; font-size: 40px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word"> globally</span></div></div>
+    <div class="card"><p class = "did-you-know">Did you know?</p>
+            <div class="basic-text-style "><span style="color: white; font-size: 40px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word">Wildfires are a major <br/>Cause of</span><span style="color: #BACF12; font-size: 60px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word"> air pollution</span><span style="color: #505F0C; font-size: 60px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word"> </span><span style="color: white; font-size: 40px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word"></span></div></div>
+        
+    <div class="card"><p class = "did-you-know">Did you know?</p>
+                <div class="basic-text-style "><span style="color: white; font-size: 40px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word"></span><span style="color: #BACF12; font-size: 60px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word">90%<br/></span><span style="color: #505F0C; font-size: 60px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word"> </span><span style="color: white; font-size: 40px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word"> of all wildfires are started by humans </span></div></div>
+    <div class="card"><p class = "did-you-know">Did you know?</p>
+                    <div class="basic-text-style "><span style="color: white; font-size: 40px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word">Global Wildfires Set to Rise by<br/> </span><span style="color: #BACF12; font-size: 60px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word">50%</span><span style="color: #505F0C; font-size: 60px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word"> </span><span style="color: white; font-size: 40px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word">by 2100</span></div></div>
+    
+    <div class="card"><p class = "did-you-know">Did you know?</p>
+                        <div class="basic-text-style "><span style="color: white; font-size: 40px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word">More than 42 million acres have burned <br/> across Canada so far </span><span style="color: #BACF12; font-size: 60px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word">this year <br/></span><span style="color: #505F0C; font-size: 60px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word"> </span><span style="color: white; font-size: 40px; font-family: Outfit; font-weight: 700; line-height: 66px; word-wrap: break-word"></span></div></div>
 {% endblock%}
