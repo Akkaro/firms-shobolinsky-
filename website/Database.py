@@ -9,14 +9,14 @@ from bson import ObjectId
 Database = Flask(__name__)
 
 
-#uri = "mongodb+srv://NEjjjO:fuckyou69@shoby0.bcrmqu3.mongodb.net/?retryWrites=true&w=majority"
+uri = "mongodb+srv://NEjjjO:fuckyou69@shoby0.bcrmqu3.mongodb.net/?retryWrites=true&w=majority"
 
-#client = MongoClient(uri)
+client = MongoClient(uri)
 
-#b = client.Mindenis
+db = client.Mindenis
 
 
-#fire = db.Minden
+fire = db.Minden
 
 fire_kicsi = db.Minden #rovid
 
