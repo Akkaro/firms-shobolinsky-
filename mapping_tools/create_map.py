@@ -21,28 +21,39 @@ def get_region_by_ip(ip_address):
     data_json=response.json()
     data=json.dumps(data_json)
     datas=json.loads(data)
-    return datas
+    return datas['country_code']
     # print(response)
     # print(response.json())
 
 
 
 
-def map_data_prep(region):
+def country_code_prep(region):
     MAP_KEY = "2ee2aefb3a335aa4a75bb6bf1fd5191f"
     # url= 'https://firms.modaps.eosdis.nasa.gov/mapserver/mapkey_status/?MAP_KEY=' + MAP_KEY
 
     # data_url='https://firms.modaps.eosdis.nasa.gov/api/area/csv/' + MAP_KEY + '/MODIS_NRT/world/1'
 
-    data_from_db=GetDataFromDb()
-    data_json=parse_json_2(data_from_db)
-    data=pd.read_json(data_json)
+    # data_from_db=GetDataFromDb()
+    # data_json=parse_json_2(data_from_db)
+    # data=pd.read_json(data_json)
 
 
-    # country_boxes_trans=pd.read_json("country_codes")
-    # country_boxes=country_boxes_trans.transpose()
-    # country_boxes_filtered=country_boxes[['name','alpha-2','boundingBox']]
-    # print(country_boxes_filtered)
+    country_boxes_trans=pd.read_json("country_codes_good")
+    country_boxes=country_boxes_trans.transpose()
+    country_boxes_filtered=country_boxes[['alpha-2','alpha-3']]
+    country_for_us=country_boxes_filtered[country_boxes_filtered['alpha-2']==region]
+    return str(country_for_us.iloc[0]['alpha-3'])
+
+def prepare_data(code):
+    MAP_KEY = "2ee2aefb3a335aa4a75bb6bf1fd5191f"
+    print(code)
+    data_url='https://firms.modaps.eosdis.nasa.gov/api/country/csv/' + MAP_KEY + '/MODIS_NRT/'+code+'/1'
+
+    # data_url=f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/{MAP_KEY}/MODIS_NRT/{code}/1"
+    data=pd.read_csv(data_url)
+    print(data)
+    return data
 
 def create_map(data):
     n=folium.Map(location=[20,0],tiles="OpenStreetMap",zoom_start=2)
@@ -60,7 +71,7 @@ def create_map(data):
         popup = folium.Popup(iframe, max_width=2650)
         m=folium.Marker(
             location=[data.iloc[i]['latitude'], data.iloc[i]['longitude']], popup=popup)
-        # m.add_to(n)
+        m.add_to(n)
         # if (region=="NA") & (data.iloc[i]['longitude'] >= -150) & (data.iloc[i]['latitude']>=40) & (data.iloc[i]['longitude']<=-49) & (data.iloc[i]['latitude']<=79):
         #     m.add_to(n)
         # elif (region=="NA") & (data.iloc[i]['longitude'] >= -180) & (data.iloc[i]['latitude']>=50) & (data.iloc[i]['longitude']<=-139) & (data.iloc[i]['latitude']<=72):
@@ -87,7 +98,7 @@ def create_map(data):
         #     m.add_to(n)
     n.show_in_browser()
 
-print(get_region_by_ip(get_ip()))
+# create_map(prepare_data(country_code_prep(get_region_by_ip(get_ip()))))
 
 
 
