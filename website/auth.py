@@ -12,7 +12,7 @@ from bson import json_util
 auth = Blueprint('auth', __name__)
 
 def parse_json(data):
-    return json.loads(json_util.dumps(data))
+    return json_util.dumps(data)
 
 
 @auth.route('/login')
