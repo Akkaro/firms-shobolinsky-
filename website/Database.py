@@ -15,4 +15,18 @@ Database = Flask(__name__)
 
 #b = client.Mindenis
 
+
 #fire = db.Minden
+
+fire_kicsi = db.Minden #rovid
+
+fire = db.EarthData24H
+
+
+
+def GetDataFromDb():
+    list = []
+    for fires in fire_kicsi.find():
+        list.append(fires)
+    return list
+
