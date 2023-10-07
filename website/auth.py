@@ -3,9 +3,19 @@ from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db   ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
+from flask import Blueprint
+from . import Database as db
+import json
+from bson import json_util
 
 
 auth = Blueprint('auth', __name__)
+
+def parse_json(data):
+    return json.loads(json_util.dumps(data))
+
+
+@auth.route('/login')
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -64,3 +74,8 @@ def sign_up():
             return redirect(url_for('views.home'))
 
     return render_template("sign_up.html", user=current_user)
+
+@auth.route('/Database')
+def Database():
+    return parse_json(db.GetDataFromDb())
+

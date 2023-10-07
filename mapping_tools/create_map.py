@@ -4,6 +4,7 @@ from folium.plugins import MarkerCluster
 import socket
 import json
 import requests
+
 from website.Database import *
 from website.auth import *
 
@@ -12,18 +13,22 @@ def get_ip():
     request=requests.get(url)
     return request.text[:-1]
 
+
 def get_region_by_ip(ip_address):
+
     IP_API_KEY="7f54f175091db8e4a3709720392a8c76"
     data=f"http://api.ipstack.com/{ip_address}?access_key=7f54f175091db8e4a3709720392a8c76"
     response=requests.get(f"http://api.ipstack.com/5.2.195.101?access_key=7f54f175091db8e4a3709720392a8c76")
     # response=requests.get(f"http://api.ipstack.com/{ip_address}",params=IP_API_KEY)
     # response=requests.get(data)
+
     data_json=response.json()
     data=json.dumps(data_json)
     datas=json.loads(data)
     return datas['country_code']
     # print(response)
     # print(response.json())
+
 
 
 
