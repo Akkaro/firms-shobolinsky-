@@ -37,10 +37,6 @@ db = client.Mindenis
 
 fire = db.Minden
 
-@Database.route('/Database')
-def hello_world():  # put application's code here
-    return 'fuck you'
-
 
 def GetDataFromDb():
     list = []
