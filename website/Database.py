@@ -18,6 +18,7 @@ data = client.Mindenis
 
 
 
+
 fire = data.Minden
 
 fire_kicsi = data.Minden #rovid
