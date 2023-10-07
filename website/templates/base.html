@@ -15,11 +15,22 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       crossorigin="anonymous"
     />
-
     <title>{% block title %}Home{% endblock%}</title>
+    <style>
+      body {
+        background-image: url("../static/image.jpg");
+        background-size: cover;
+        width: 160px;
+        height: 160px;
+        border: 2px solid;
+        resize: both;
+        overflow: scroll;
+      }
+   </style>
   </head>
 
   <body>
+    <body background="image.jpg">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <button
         class="navbar-toggler"
