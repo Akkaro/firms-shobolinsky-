@@ -43,7 +43,6 @@ def create_map(country="Romania"):
             location=[data.iloc[i]['latitude'],data.iloc[i]['longitude']],popup=popup).add_to(n)
     n.show_in_browser()
 
-get_country_by_ip(get_ip())
-create_map()
+
 
 
