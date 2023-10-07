@@ -1,6 +1,5 @@
 from flask import Flask
 from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
 import requests
 import json
 from bson import ObjectId
@@ -10,11 +9,14 @@ from bson import ObjectId
 Database = Flask(__name__)
 
 
-uri = "mongodb+srv://NEjjjO:fuckyou69@shoby0.bcrmqu3.mongodb.net/?retryWrites=true&w=majority"
+#uri = "mongodb+srv://NEjjjO:fuckyou69@shoby0.bcrmqu3.mongodb.net/?retryWrites=true&w=majority"
 
-client = MongoClient(uri)
+#client = MongoClient(uri)
 
-db = client.Mindenis
+#b = client.Mindenis
+
+
+#fire = db.Minden
 
 fire_kicsi = db.Minden #rovid
 
@@ -27,3 +29,4 @@ def GetDataFromDb():
     for fires in fire_kicsi.find():
         list.append(fires)
     return list
+
