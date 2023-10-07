@@ -47,11 +47,12 @@ def country_code_prep(region):
 
 def prepare_data(code):
     MAP_KEY = "2ee2aefb3a335aa4a75bb6bf1fd5191f"
+    print(code)
+    data_url='https://firms.modaps.eosdis.nasa.gov/api/country/csv/' + MAP_KEY + '/MODIS_NRT/'+code+'/1'
 
-    data_url='https://firms.modaps.eosdis.nasa.gov/api/area/csv/' + MAP_KEY + '/MODIS_NRT/ROU/1'
-
-    data_url=f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/{MAP_KEY}/MODIS_NRT/{code}/1"
+    # data_url=f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/{MAP_KEY}/MODIS_NRT/{code}/1"
     data=pd.read_csv(data_url)
+    print(data)
     return data
 
 def create_map(data):
@@ -70,7 +71,7 @@ def create_map(data):
         popup = folium.Popup(iframe, max_width=2650)
         m=folium.Marker(
             location=[data.iloc[i]['latitude'], data.iloc[i]['longitude']], popup=popup)
-        # m.add_to(n)
+        m.add_to(n)
         # if (region=="NA") & (data.iloc[i]['longitude'] >= -150) & (data.iloc[i]['latitude']>=40) & (data.iloc[i]['longitude']<=-49) & (data.iloc[i]['latitude']<=79):
         #     m.add_to(n)
         # elif (region=="NA") & (data.iloc[i]['longitude'] >= -180) & (data.iloc[i]['latitude']>=50) & (data.iloc[i]['longitude']<=-139) & (data.iloc[i]['latitude']<=72):
@@ -97,7 +98,7 @@ def create_map(data):
         #     m.add_to(n)
     n.show_in_browser()
 
-map_data_prep(get_region_by_ip(get_ip()))
+# create_map(prepare_data(country_code_prep(get_region_by_ip(get_ip()))))
 
 
 
