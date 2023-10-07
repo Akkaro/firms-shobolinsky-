@@ -9,25 +9,6 @@ from bson import ObjectId
 
 Database = Flask(__name__)
 
-url = "https://eu-central-1.aws.data.mongodb-api.com/app/data-ixqoi/endpoint/data/v1/action/findOne"
-
-payload = json.dumps({
-    "collection": "listingsAndReviews",
-    "database": "sample_airbnb",
-    "dataSource": "Shoby0",
-    "projection": {
-        "_id": 3
-    }
-})
-headers = {
-    'Content-Type': 'application/json',
-    'Access-Control-Request-Headers': '*',
-    'api-key': '652125c3e7f767ae3108aa32',
-}
-
-response = requests.request("POST", url, headers=headers, data=payload)
-
-print(response.text)
 
 uri = "mongodb+srv://NEjjjO:fuckyou69@shoby0.bcrmqu3.mongodb.net/?retryWrites=true&w=majority"
 
