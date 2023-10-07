@@ -39,7 +39,7 @@ def country_code_prep(region):
     # data=pd.read_json(data_json)
 
 
-    country_boxes_trans=pd.read_json("mapping_tools/country_codes_good")
+    country_boxes_trans=pd.read_json("country_codes_good")
     country_boxes=country_boxes_trans.transpose()
     country_boxes_filtered=country_boxes[['alpha-2','alpha-3']]
     country_for_us=country_boxes_filtered[country_boxes_filtered['alpha-2']==region]
@@ -96,10 +96,9 @@ def create_map(data):
         #     m.add_to(n)
         # elif (region=="OC") & (data.iloc[i]['longitude'] >= 110) & (data.iloc[i]['latitude'] >= -55) & (data.iloc[i]['longitude'] <= 180) & (data.iloc[i]['latitude'] <= -10):
         #     m.add_to(n)
-    # n.show_in_browser()
-    n.save("website/templates/map.html")
+    n.show_in_browser()
 
-
+# create_map(prepare_data(country_code_prep(get_region_by_ip(get_ip()))))
 
 
 

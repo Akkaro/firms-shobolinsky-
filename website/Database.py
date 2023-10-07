@@ -13,9 +13,7 @@ uri = "mongodb+srv://NEjjjO:fuckyou69@shoby0.bcrmqu3.mongodb.net/?retryWrites=tr
 
 client = MongoClient(uri)
 
-db = client.Mindenis
-
-
+b = client.Mindenis
 
 
 fire = db.Minden
