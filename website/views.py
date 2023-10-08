@@ -19,17 +19,18 @@ def map():
     create_map(data,region)
     return render_template("map.html")
 
-@views.route('/report',  methods=['GET', 'POST'])
-def report():
-    if request.method == 'POST':
-        print("belepettttttttttttttttttttttttttttttttttttttttttt")
-        return render_template("specify.html")
-    return render_template("report.html")
-
 @views.route('/specify',  methods=['GET', 'POST'])
 def specify():
     if request.method == 'POST':
         print("belepettttttttttttttttttttttttttttttttttttttttttt")
-        add_user_report()
         return render_template("report.html")
-    return render_template("specify.html")
+    
+
+@views.route('/report',  methods=['GET', 'POST'])
+def report():
+    if request.method == 'POST':
+        print("kilepetttttt")
+        return render_template("specify.html")
+
+
+

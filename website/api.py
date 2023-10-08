@@ -35,11 +35,10 @@ def add_user_report():
   db = mongoClient.Mindenis
   Update_Data = db.Update_Data
   header = ['country_id', 'latitude', 'longitude', 'country_id', 'latitude', 'longitude', 'brightness', 'scan', 'track', 'acq_date', 'acq_time', 'satellite', 'instrument', 'confidence',	'version', 'bright_t31', 'frp',	'daynight']
-  
+ 
   longitude,latitude,CountryID = get_coordinates_and_country()
   each = "1," + CountryID + "," + longitude + "," + latitude
   
-  for field in header:
-        row[field] = each[field]
-  db.Update_Data.insert_one(row)
+  db.Update_Data.insert_one(each)
+  print("belepettttttttttttttttttttttttttttttttttttttttttt")
   
