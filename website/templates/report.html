@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% block title%}Sign up{% endblock %} {% block content
+    %}
+    <style>.button-custom {
+      background-color:  #A0B23A;;
+      border: none;
+      border-radius: 7px;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      font-family: 'Times New Roman', Times, serif;
+      display: inline-block;
+      font-size: 20px;
+      font-weight: 700;
+      margin: 4px 2px;
+    } /* Green */
+    
+    </style> 
+    <style>.text-custom {
+     
+     
+     color: white;
+     
+     font-family: 'Times New Roman', Times, serif;
+     
+     font-size: 20px;
+     font-weight: 700;
+     margin: 4px 2px;
+    }
+    </style>
+    
+    <style>.header-custom {
+    
+    
+     color: white;
+     
+     
+     font-family: 'Times New Roman', Times, serif;
+     
+     font-size: 40px;
+     font-weight: 700;
+     
+    }
+    </style>
+    
+    
+    
+    <form method="POST">
+      <h3 class = "header-custom" allign="center">Do you wnat to report a fire?</h3>
+      <button class = "button-custom" type="submit" class="btn btn-primary">Submit</buttton>
+    </form>
+    {% endblock%}
+    

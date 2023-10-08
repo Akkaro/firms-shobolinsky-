@@ -17,3 +17,13 @@ def map():
     data,region=prepare_data(code,region)
     create_map(data,region)
     return render_template("map.html")
+@views.route('/report',  methods=['GET', 'POST'])
+def report():
+    if request.method == 'POST':
+        return render_template("specify.html")
+    return render_template("report.html")
+@views.route('/specify',  methods=['GET', 'POST'])
+def specify():
+    if request.method == 'POST':
+        return render_template("home.html")
+    return render_template("specify.html")
