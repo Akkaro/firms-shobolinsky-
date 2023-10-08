@@ -60,3 +60,4 @@ def confirm():
 def denied():
     print("hello")
     return render_template("map.html")
+
