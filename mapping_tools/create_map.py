@@ -11,7 +11,9 @@ from website.Database import *
 
 def get_date():
     return date.today()
-
+    
+    
+    
 def get_coordinates_and_country(ip_address):
     region=get_region_by_ip(ip_address)
     latitude=region['latitude']
@@ -40,7 +42,15 @@ def get_region_by_ip(ip_address):
 
 
 
-
+def get_csv():
+    ip_address = get_ip()
+    region=get_region_by_ip(ip_address)
+    code,region=country_code_prep(region)
+    data_url='https://firms.modaps.eosdis.nasa.gov/api/country/csv/' + MAP_KEY + '/MODIS_NRT/'+code+'/2'
+    data=pd.read_csv(data_url)
+    return data
+    
+    
 def country_code_prep(region):
     MAP_KEY = "2ee2aefb3a335aa4a75bb6bf1fd5191f"
     # url= 'https://firms.modaps.eosdis.nasa.gov/mapserver/mapkey_status/?MAP_KEY=' + MAP_KEY
@@ -120,6 +130,10 @@ def create_map(data,region):
     data_from_db=GetDataFromDb()
     data_json=parse_json_2(data_from_db)
     data=pd.read_json(data_json)
+    
+    user_longitude,user_latitude,code=get_coordinates_and_country(get_ip())
+    
+    
     for i in range(0,len(data)):
         html1 = f"""
                             <p>Fire detected by {data.iloc[i]['instrument']}</p>
@@ -133,10 +147,17 @@ def create_map(data,region):
                                 <div><a href="website/templates/home.html"><button>Confirm</button></a></div>
                                 <div><a href="website/templates/home.html"><button>Deny</button></a></div>
                             </div>
-                            <p>And that's a <a href="https://www.python-graph-gallery.com">link</a></p>
                             """
-                        
-        if (data.iloc[i]['longitude'] >= longitude_min) & (data.iloc[i]['latitude']>=latitude_use_min) & (data.iloc[i]['longitude']<=longitude_max) & (data.iloc[i]['latitude']<=latitude_use_max):
+        html2 = f"""
+                            <p>Fire detected by {data.iloc[i]['instrument']}</p>
+                            <ul>
+                                <li>Longitude: {data.iloc[i]['longitude']}</li>
+                                <li>Latitude: {data.iloc[i]['latitude']}</li>
+                                <li>Detection time: {data.iloc[i]['acq_date']}</li>
+                            </ul>
+
+                            """
+        if ((data.iloc[i]['longitude']-user_longitude) <= 0.00002) & ((data.iloc[i]['latitude']-user_latitude)<=0.00002):
             iframe = folium.IFrame(html=html1, width=200, height=200)
         else:
             iframe = folium.IFrame(html=html2, width=200, height=200)

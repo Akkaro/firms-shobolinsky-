@@ -56,5 +56,8 @@ def add_user_report():
 
   db.Update_Data.insert_one(sample_dict)
   
-  print("belepettttttttttttttttttttttttttttttttttttttttttt")
+def get_csv():
+  mongoClient = MongoClient(uri)
+  db = mongoClient.Mindenis
+  Update_Data = db.Update_Data
   
