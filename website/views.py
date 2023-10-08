@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect
 from mapping_tools.create_map import *
+from website.api import add_user_report
 views = Blueprint('views', __name__)
 
 
@@ -17,13 +18,18 @@ def map():
     data,region=prepare_data(code,region)
     create_map(data,region)
     return render_template("map.html")
+
 @views.route('/report',  methods=['GET', 'POST'])
 def report():
     if request.method == 'POST':
+        print("belepettttttttttttttttttttttttttttttttttttttttttt")
         return render_template("specify.html")
     return render_template("report.html")
+
 @views.route('/specify',  methods=['GET', 'POST'])
 def specify():
     if request.method == 'POST':
-        return render_template("home.html")
+        print("belepettttttttttttttttttttttttttttttttttttttttttt")
+        add_user_report()
+        return render_template("report.html")
     return render_template("specify.html")
