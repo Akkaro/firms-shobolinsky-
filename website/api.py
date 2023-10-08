@@ -47,6 +47,7 @@ def add_user_report():
   current_date = now.strftime("%H:%M:%S")
 
   sample_dict = {
+    "instrument": "user",
     "country_id": str(CountryID),
     "latitude": str(latitude),
     "longitude": str(longitude),

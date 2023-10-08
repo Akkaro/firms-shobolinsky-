@@ -28,4 +28,12 @@ def report():
     return render_template("report.html")
 
 
+@views.route('/confirm')
+def confirm():
+    print("hello")
+    return render_template("map.html")
 
+@views.route('/denied')
+def denied():
+    print("hello")
+    return render_template("map.html")
