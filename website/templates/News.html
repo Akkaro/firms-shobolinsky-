@@ -1,0 +1,71 @@
+{% extends "base.html" %} {% block title%}Home{% endblock %}
+{% block content %}
+
+
+    <style>
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
+    <div class="content">
+
+    <div class="container">
+         <button> <a href="/refress_db">Refress</a></button>
+        <p></p>
+
+
+
+
+      <div class="table-responsive">
+
+        <table id= "customers" bgcolor="#ddd" >
+          <thead>
+            <tr>
+
+              <th scope="col">Title</th>
+              <th scope="col">Short Summary</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for new in news%}
+              <tr scope="row">
+                  <td>
+                      <img href = {{ new.url }} >
+                          <img src = "{{new.contentUrl}}" style ="width:100px;height:100px;" >
+
+                      <p>
+                      <a href = {{ new.NewsURL }}> {{  new.name }} </a>
+                      </p>
+                  </td>
+                  <td>
+                      <p id = "Szoveg">{{new.description }}</p>
+                  </td>
+                  <td>{{new.datePublished}}</td>
+                  {% endfor %}
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock%}

@@ -1,8 +1,5 @@
 import pandas as pd
 import folium
-from folium.plugins import MarkerCluster
-import socket
-import json
 import requests
 from website.auth import *
 import math
@@ -67,7 +64,7 @@ def prepare_data(code,region):
     db_list = GetDataFromDb()
     data=pd.read_csv(data_url)
 
-    return data,region
+    return data, region
 
 def create_map(data,region):
     n=folium.Map(location=[20,0],tiles="OpenStreetMap",zoom_start=2)
