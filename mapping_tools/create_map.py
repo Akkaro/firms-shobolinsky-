@@ -82,10 +82,10 @@ def prepare_data(code,region):
 def create_map(data,region):
     n=folium.Map(location=[20,0],tiles="OpenStreetMap",zoom_start=2)
 
-    latitude_use_min=(float)(region['latitude'])-0.0449
-    latitude_use_max=(float)(region['latitude'])+0.0449
-    longitude_max=(float)(region['longitude'])+0.0449/math.cos((float)(region['latitude']))
-    longitude_min=(float)(region['longitude'])-0.0449/math.cos((float)(region['latitude']))
+    latitude_use_min=(float)(region['latitude'])-0.0002
+    latitude_use_max=(float)(region['latitude'])+0.0002
+    longitude_max=(float)(region['longitude'])+0.0002
+    longitude_min=(float)(region['longitude'])-0.0002
     for i in range(0,len(data)):
         html2 = f"""
                             <p>Fire detected by {data.iloc[i]['instrument']}</p>
@@ -95,12 +95,11 @@ def create_map(data,region):
                                 <li>Detection time: {data.iloc[i]['acq_date']}</li>
                             </ul>
                             </p>
-                            <p>And that's a <a href="https://www.python-graph-gallery.com">link</a></p>
                             """
         iframe = folium.IFrame(html=html2, width=200, height=200)
         popup = folium.Popup(iframe, max_width=2650)
         m=folium.Marker(
-            location=[data.iloc[i]['latitude'], data.iloc[i]['longitude']], popup=popup)
+            location=[data.iloc[i]['latitude'], data.iloc[i]['longitude']],icon=folium.Icon("red"), popup=popup)
         m.add_to(n)
         # if (region=="NA") & (data.iloc[i]['longitude'] >= -150) & (data.iloc[i]['latitude']>=40) & (data.iloc[i]['longitude']<=-49) & (data.iloc[i]['latitude']<=79):
         #     m.add_to(n)
@@ -130,10 +129,6 @@ def create_map(data,region):
     data_from_db=GetDataFromDb()
     data_json=parse_json_2(data_from_db)
     data=pd.read_json(data_json)
-    
-    user_longitude,user_latitude,code=get_coordinates_and_country(get_ip())
-    
-    
     for i in range(0,len(data)):
         html1 = f"""
                             <p>Fire detected by {data.iloc[i]['instrument']}</p>
@@ -157,13 +152,13 @@ def create_map(data,region):
                             </ul>
 
                             """
-        if ((data.iloc[i]['longitude']-user_longitude) <= 0.00002) & ((data.iloc[i]['latitude']-user_latitude)<=0.00002):
+        if (data.iloc[i]['longitude']<= longitude_max ) & (data.iloc[i]['latitude'] <= latitude_use_max) & (data.iloc[i]['longitude']>=longitude_min) & (data.iloc[i]['latitude']>=latitude_use_min):
             iframe = folium.IFrame(html=html1, width=200, height=200)
         else:
             iframe = folium.IFrame(html=html2, width=200, height=200)
         popup = folium.Popup(iframe, max_width=2650)
         m=folium.Marker(
-            location=[data.iloc[i]['latitude'], data.iloc[i]['longitude']], popup=popup)
+            location=[data.iloc[i]['latitude'], data.iloc[i]['longitude']], icon=folium.Icon("green"),popup=popup)
         m.add_to(n)
 
     n.save("website/templates/map.html")
