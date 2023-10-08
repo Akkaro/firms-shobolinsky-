@@ -1,48 +1,93 @@
-{% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block
-  content %}
-  <form method="POST">
-    <h3 align="center">Sign Up</h3>
-    <div class="form-group">
-      <label for="email">Email Address</label>
-      <input
-        type="email"
-        class="form-control"
-        id="email"
-        name="email"
-        placeholder="Enter email"
-      />
-    </div>
-    <div class="form-group">
-      <label for="firstName">First Name</label>
-      <input
-        type="text"
-        class="form-control"
-        id="firstName"
-        name="firstName"
-        placeholder="Enter first name"
-      />
-    </div>
-    <div class="form-group">
-      <label for="password1">Password</label>
-      <input
-        type="password"
-        class="form-control"
-        id="password1"
-        name="password1"
-        placeholder="Enter password"
-      />
-    </div>
-    <div class="form-group">
-      <label for="password2">Password (Confirm)</label>
-      <input
-        type="password"
-        class="form-control"
-        id="password2"
-        name="password2"
-        placeholder="Confirm password"
-      />
-    </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-  {% endblock %}
+{% extends "base.html" %} {% block title%}Sign up{% endblock %} {% block content
+%}
+<style>.button-custom {
+  background-color:  #A0B23A;;
+  border: none;
+  border-radius: 7px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-family: 'Times New Roman', Times, serif;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 4px 2px;
+} /* Green */
+
+</style> 
+<style>.text-custom {
+ 
+ 
+ color: white;
+ 
+ font-family: 'Times New Roman', Times, serif;
+ 
+ font-size: 20px;
+ font-weight: 700;
+ margin: 4px 2px;
+}
+</style>
+
+<style>.header-custom {
+
+
+ color: white;
+ 
+ 
+ font-family: 'Times New Roman', Times, serif;
+ 
+ font-size: 40px;
+ font-weight: 700;
+ 
+}
+</style>
+
+
+
+<form method="POST">
+  <h3 class = "header-custom" allign="center">Sign up</h3>
+  <div class="form-group">
+    <label class = "text-custom" for="email">Email Adress</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      placeholder="Enter email"
+    />
+  </div>
+  <div class="form-group">
+    <label class = "text-custom" for="firstName">First Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="fisrtName"
+      name="firstName"
+      placeholder="Enter first name"
+    />
+  </div>
+  <div class="form-group">
+    <label class = "text-custom" for="password1">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password1"
+      name="password1"
+      placeholder="Enter password"
+    />
+  </div>
+  <div class="form-group">
+    <label class = "text-custom" for="password2">Password (Confirm)</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password2"
+      name="password2"
+      placeholder="Confirm password"
+    />
+  </div>
+  <br />
+  <button class = "button-custom" type="submit" class="btn btn-primary">Submit</buttton>
+</form>
+{% endblock%}
