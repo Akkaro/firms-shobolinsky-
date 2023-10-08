@@ -34,11 +34,18 @@ def add_user_report():
   mongoClient = MongoClient(uri)
   db = mongoClient.Mindenis
   Update_Data = db.Update_Data
-  header = ['country_id', 'latitude', 'longitude', 'country_id', 'latitude', 'longitude', 'brightness', 'scan', 'track', 'acq_date', 'acq_time', 'satellite', 'instrument', 'confidence',	'version', 'bright_t31', 'frp',	'daynight']
- 
-  longitude,latitude,CountryID = get_coordinates_and_country()
-  each = "1," + CountryID + "," + longitude + "," + latitude
+  header = ['country_id', 'latitude', 'longitude', 'brightness', 'scan', 'track', 'acq_date', 'acq_time', 'satellite', 'instrument', 'confidence',	'version', 'bright_t31', 'frp',	'daynight']
   
-  db.Update_Data.insert_one(each)
+  longitude,latitude,CountryID = get_coordinates_and_country(get_ip())
+  each = str(CountryID) + "," + str(longitude) + "," + str(latitude)
+ 
+  sample_dict = {
+    "country_id": str(CountryID),
+    "latitude": str(longitude),
+    "longitude": str(latitude)
+  }
+
+  db.Update_Data.insert_one(sample_dict)
+  
   print("belepettttttttttttttttttttttttttttttttttttttttttt")
   
