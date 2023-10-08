@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from . import db   ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
 from flask import Blueprint
+from . import Database as new_db_context
 import json
 from bson import json_util
 
@@ -79,5 +80,5 @@ def sign_up():
 
 @auth.route('/Database')
 def Database():
-    return parse_json(db.GetDataFromDb())
+    return parse_json(new_db_context.GetDataFromDb())
 
