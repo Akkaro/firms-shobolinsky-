@@ -4,7 +4,6 @@ from folium.plugins import MarkerCluster
 import socket
 import json
 import requests
-from website.Database import *
 from website.auth import *
 
 def get_ip():
@@ -48,7 +47,7 @@ def country_code_prep(region):
 def prepare_data(code):
     MAP_KEY = "2ee2aefb3a335aa4a75bb6bf1fd5191f"
     print(code)
-    data_url='https://firms.modaps.eosdis.nasa.gov/api/country/csv/' + MAP_KEY + '/MODIS_NRT/'+code+'/1'
+    data_url='https://firms.modaps.eosdis.nasa.gov/api/country/csv/' + MAP_KEY + '/MODIS_NRT/'+code+'/2'
 
     # data_url=f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/{MAP_KEY}/MODIS_NRT/{code}/1"
     data=pd.read_csv(data_url)
@@ -98,8 +97,3 @@ def create_map(data):
         #     m.add_to(n)
     # n.show_in_browser()
     n.save("website/templates/map.html")
-
-
-
-
-
