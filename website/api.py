@@ -1,6 +1,7 @@
 from pymongo.mongo_client import MongoClient
 from pymongo import MongoClient
 import csv
+from mapping_tools.create_map import *
 
 # Let's set your map key that was emailed to you. It should look something like 'abcdef1234567890abcdef1234567890'
 MAP_KEY = 'b5b8459b6dd404d86ff6370540ec4fd7'
@@ -9,6 +10,10 @@ MAP_KEY = 'b5b8459b6dd404d86ff6370540ec4fd7'
 
 uri = "mongodb+srv://NEjjjO:fuckyou69@shoby0.bcrmqu3.mongodb.net/?retryWrites=true&w=majority"
 
+mongoClient = MongoClient(uri)
+db = mongoClient.Mindenis
+Update_Data = db.Update_Data
+  
 #client = MongoClient(uri)
 
 #db = client.Mindenis
@@ -94,3 +99,16 @@ for each in reader:
  
 #fire.insert_one(peru_url)
 print(df_peru)
+
+def add_user_report():
+  mongoClient = MongoClient(uri)
+  db = mongoClient.Mindenis
+  Update_Data = db.Update_Data
+  header = ['country_id', 'latitude', 'longitude', 'country_id', 'latitude', 'longitude', 'brightness', 'scan', 'track', 'acq_date', 'acq_time', 'satellite', 'instrument', 'confidence',	'version', 'bright_t31', 'frp',	'daynight']
+  
+  each = "1," + "orszag," + "longitude," + "latitude," + "brightness"
+  
+  for field in header:
+        row[field] = each[field]
+  db.Update_Data.insert_one(row)
+  
