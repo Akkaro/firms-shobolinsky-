@@ -13,7 +13,7 @@ def safety():
 def map():
     ip=get_ip()
     region=get_region_by_ip(ip)
-    code=country_code_prep(region)
-    data=prepare_data(code)
-    create_map(data)
+    code,region=country_code_prep(region)
+    data,region=prepare_data(code,region)
+    create_map(data,region)
     return render_template("map.html")

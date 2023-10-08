@@ -5,7 +5,7 @@ import socket
 import json
 import requests
 from website.auth import *
-
+import math
 def get_ip():
     url="https://checkip.amazonaws.com"
     request=requests.get(url)
@@ -13,14 +13,15 @@ def get_ip():
 
 def get_region_by_ip(ip_address):
     IP_API_KEY="7f54f175091db8e4a3709720392a8c76"
-    data=f"http://api.ipstack.com/{ip_address}?access_key=7f54f175091db8e4a3709720392a8c76"
-    response=requests.get(f"http://api.ipstack.com/5.2.195.101?access_key=7f54f175091db8e4a3709720392a8c76")
-    # response=requests.get(f"http://api.ipstack.com/{ip_address}",params=IP_API_KEY)
+    # data=f"http://api.ipstack.com/5.2.195.101?access_key=7f54f175091db8e4a3709720392a8c76"
+    # data="http://api.ipstack.com/134.201.250.155?access_key=7f54f175091db8e4a3709720392a8c76"
+    response=requests.get(f"http://api.ipstack.com/{ip_address}?access_key=7f54f175091db8e4a3709720392a8c76")
+    # response = requests.get(f"http://api.ipstack.com/134.201.250.155?access_key=7f54f175091db8e4a3709720392a8c76")
     # response=requests.get(data)
     data_json=response.json()
     data=json.dumps(data_json)
     datas=json.loads(data)
-    return datas['country_code']
+    return datas
     # print(response)
     # print(response.json())
 
@@ -41,32 +42,55 @@ def country_code_prep(region):
     country_boxes_trans=pd.read_json("mapping_tools/country_codes_good")
     country_boxes=country_boxes_trans.transpose()
     country_boxes_filtered=country_boxes[['alpha-2','alpha-3']]
-    country_for_us=country_boxes_filtered[country_boxes_filtered['alpha-2']==region]
-    return str(country_for_us.iloc[0]['alpha-3'])
+    country_for_us=country_boxes_filtered[country_boxes_filtered['alpha-2']==region['country_code']]
+    return str(country_for_us.iloc[0]['alpha-3']),region
 
-def prepare_data(code):
+def prepare_data(code,region):
     MAP_KEY = "2ee2aefb3a335aa4a75bb6bf1fd5191f"
     print(code)
     data_url='https://firms.modaps.eosdis.nasa.gov/api/country/csv/' + MAP_KEY + '/MODIS_NRT/'+code+'/2'
 
     # data_url=f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/{MAP_KEY}/MODIS_NRT/{code}/1"
     data=pd.read_csv(data_url)
-    print(data)
-    return data
 
-def create_map(data):
+    return data,region
+
+def create_map(data,region):
     n=folium.Map(location=[20,0],tiles="OpenStreetMap",zoom_start=2)
+
+    latitude_use_min=(float)(region['latitude'])-0.0449
+    latitude_use_max=(float)(region['latitude'])+0.0449
+    longitude_max=(float)(region['longitude'])+0.0449/math.cos((float)(region['latitude']))
+    longitude_min=(float)(region['longitude'])-0.0449/math.cos((float)(region['latitude']))
     for i in range(0,len(data)):
-        html = f"""
-                <p>You can use any html here! Let's do a list:</p>
-                <ul>
-                    <li>Item 1</li>
-                    <li>Item 2</li>
-                </ul>
-                </p>
-                <p>And that's a <a href="https://www.python-graph-gallery.com">link</a></p>
-                """
-        iframe = folium.IFrame(html=html, width=100, height=100)
+        html1 = f"""
+                            <p>Fire detected by {data.iloc[i]['instrument']}</p>
+                            <ul>
+                                <li>Longitude: {data.iloc[i]['longitude']}</li>
+                                <li>Latitude: {data.iloc[i]['latitude']}</li>
+                                <li>Detection time: {data.iloc[i]['acq_date']}</li>
+                            </ul>
+                            </p>
+                            <div vertical layout>
+                                <div><a href="website/templates/home.html"><button>Confirm</button></a></div>
+                                <div><a href="website/templates/home.html"><button>Deny</button></a></div>
+                            </div>
+                            <p>And that's a <a href="https://www.python-graph-gallery.com">link</a></p>
+                            """
+        html2 = f"""
+                            <p>Fire detected by {data.iloc[i]['instrument']}</p>
+                            <ul>
+                                <li>Longitude: {data.iloc[i]['longitude']}</li>
+                                <li>Latitude: {data.iloc[i]['latitude']}</li>
+                                <li>Detection time: {data.iloc[i]['acq_date']}</li>
+                            </ul>
+                            </p>
+                            <p>And that's a <a href="https://www.python-graph-gallery.com">link</a></p>
+                            """
+        if (data.iloc[i]['longitude'] >= longitude_min) & (data.iloc[i]['latitude']>=latitude_use_min) & (data.iloc[i]['longitude']<=longitude_max) & (data.iloc[i]['latitude']<=latitude_use_max):
+            iframe = folium.IFrame(html=html1, width=200, height=200)
+        else:
+            iframe = folium.IFrame(html=html2, width=200, height=200)
         popup = folium.Popup(iframe, max_width=2650)
         m=folium.Marker(
             location=[data.iloc[i]['latitude'], data.iloc[i]['longitude']], popup=popup)
