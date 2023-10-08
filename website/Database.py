@@ -17,7 +17,7 @@ client = MongoClient(uri)
 data = client.Mindenis
 
 
-
+user_data=data.Update_Data
 
 fire = data.Minden
 
@@ -29,7 +29,7 @@ fire = data.EarthData24H
 
 def GetDataFromDb():
     list = []
-    for fires in fire_kicsi.find():
+    for fires in user_data.find():
         list.append(fires)
     return list
 

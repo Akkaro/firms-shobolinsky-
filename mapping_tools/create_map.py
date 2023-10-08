@@ -7,6 +7,7 @@ import requests
 from website.auth import *
 import math
 from datetime import date
+from website.Database import *
 def get_date():
     return date.today()
 
@@ -74,6 +75,50 @@ def create_map(data,region):
     longitude_max=(float)(region['longitude'])+0.0449/math.cos((float)(region['latitude']))
     longitude_min=(float)(region['longitude'])-0.0449/math.cos((float)(region['latitude']))
     for i in range(0,len(data)):
+        html2 = f"""
+                            <p>Fire detected by {data.iloc[i]['instrument']}</p>
+                            <ul>
+                                <li>Longitude: {data.iloc[i]['longitude']}</li>
+                                <li>Latitude: {data.iloc[i]['latitude']}</li>
+                                <li>Detection time: {data.iloc[i]['acq_date']}</li>
+                            </ul>
+                            </p>
+                            <p>And that's a <a href="https://www.python-graph-gallery.com">link</a></p>
+                            """
+        iframe = folium.IFrame(html=html2, width=200, height=200)
+        popup = folium.Popup(iframe, max_width=2650)
+        m=folium.Marker(
+            location=[data.iloc[i]['latitude'], data.iloc[i]['longitude']], popup=popup)
+        m.add_to(n)
+        # if (region=="NA") & (data.iloc[i]['longitude'] >= -150) & (data.iloc[i]['latitude']>=40) & (data.iloc[i]['longitude']<=-49) & (data.iloc[i]['latitude']<=79):
+        #     m.add_to(n)
+        # elif (region=="NA") & (data.iloc[i]['longitude'] >= -180) & (data.iloc[i]['latitude']>=50) & (data.iloc[i]['longitude']<=-139) & (data.iloc[i]['latitude']<=72):
+        #     m.add_to(n)
+        # elif (region=="NA") & (data.iloc[i]['longitude'] >= -160.5) & (data.iloc[i]['latitude']>=17.5) & (data.iloc[i]['longitude']<=-63.8) & (data.iloc[i]['latitude']<=50):
+        #     m.add_to(n)
+        # elif (region=="NA") & (data.iloc[i]['longitude'] >= -119.5) & (data.iloc[i]['latitude']>=7) & (data.iloc[i]['longitude']<=-58.8) & (data.iloc[i]['latitude']<=33.5):
+        #     m.add_to(n)
+        # elif (region=="SA") & (data.iloc[i]['longitude'] >= -112) & (data.iloc[i]['latitude']>=60) & (data.iloc[i]['longitude']<=-26) & (data.iloc[i]['latitude']<=13):
+        #     m.add_to(n)
+        # elif (region == "EU") & (data.iloc[i]['longitude'] >= -26) & (data.iloc[i]['latitude'] >= 34) & (data.iloc[i]['longitude'] <= 35) & (data.iloc[i]['latitude'] <= 82):
+        #     m.add_to(n)
+        # elif (region == "AF") & (data.iloc[i]['longitude'] >= -27) & (data.iloc[i]['latitude'] >= -10) & (data.iloc[i]['longitude'] <= 52) & (data.iloc[i]['latitude'] <= 37.5):
+        #     m.add_to(n)
+        # elif (region == "AF") & (data.iloc[i]['longitude'] >= 10) & (data.iloc[i]['latitude'] >= -36) & (data.iloc[i]['longitude'] <= 58.5) & (data.iloc[i]['latitude'] <= -4):
+        #     m.add_to(n)
+        # elif (region=="AS") & (data.iloc[i]['longitude'] >= 26) & (data.iloc[i]['latitude'] >= 9) & (data.iloc[i]['longitude'] <= 180) & (data.iloc[i]['latitude'] <= 83.5):
+        #     m.add_to(n)
+        # elif (region=="AS") and (data.iloc[i]['longitude'] >= 54) and (data.iloc[i]['latitude'] >= 5.5) and (data.iloc[i]['longitude'] <= 102) and (data.iloc[i]['latitude'] <= 40):
+        #     m.add_to(n)
+        # elif (region=="AS") & (data.iloc[i]['longitude'] >= 88) & (data.iloc[i]['latitude'] >= -12) & (data.iloc[i]['longitude'] <= 163) & (data.iloc[i]['latitude'] <= 31):
+        #     m.add_to(n)
+        # elif (region=="OC") & (data.iloc[i]['longitude'] >= 110) & (data.iloc[i]['latitude'] >= -55) & (data.iloc[i]['longitude'] <= 180) & (data.iloc[i]['latitude'] <= -10):
+        #     m.add_to(n)
+    # n.show_in_browser()
+    data_from_db=GetDataFromDb()
+    data_json=parse_json_2(data_from_db)
+    data=pd.read_json(data_json)
+    for i in range(0,len(data)):
         html1 = f"""
                             <p>Fire detected by {data.iloc[i]['instrument']}</p>
                             <ul>
@@ -106,29 +151,5 @@ def create_map(data,region):
         m=folium.Marker(
             location=[data.iloc[i]['latitude'], data.iloc[i]['longitude']], popup=popup)
         m.add_to(n)
-        # if (region=="NA") & (data.iloc[i]['longitude'] >= -150) & (data.iloc[i]['latitude']>=40) & (data.iloc[i]['longitude']<=-49) & (data.iloc[i]['latitude']<=79):
-        #     m.add_to(n)
-        # elif (region=="NA") & (data.iloc[i]['longitude'] >= -180) & (data.iloc[i]['latitude']>=50) & (data.iloc[i]['longitude']<=-139) & (data.iloc[i]['latitude']<=72):
-        #     m.add_to(n)
-        # elif (region=="NA") & (data.iloc[i]['longitude'] >= -160.5) & (data.iloc[i]['latitude']>=17.5) & (data.iloc[i]['longitude']<=-63.8) & (data.iloc[i]['latitude']<=50):
-        #     m.add_to(n)
-        # elif (region=="NA") & (data.iloc[i]['longitude'] >= -119.5) & (data.iloc[i]['latitude']>=7) & (data.iloc[i]['longitude']<=-58.8) & (data.iloc[i]['latitude']<=33.5):
-        #     m.add_to(n)
-        # elif (region=="SA") & (data.iloc[i]['longitude'] >= -112) & (data.iloc[i]['latitude']>=60) & (data.iloc[i]['longitude']<=-26) & (data.iloc[i]['latitude']<=13):
-        #     m.add_to(n)
-        # elif (region == "EU") & (data.iloc[i]['longitude'] >= -26) & (data.iloc[i]['latitude'] >= 34) & (data.iloc[i]['longitude'] <= 35) & (data.iloc[i]['latitude'] <= 82):
-        #     m.add_to(n)
-        # elif (region == "AF") & (data.iloc[i]['longitude'] >= -27) & (data.iloc[i]['latitude'] >= -10) & (data.iloc[i]['longitude'] <= 52) & (data.iloc[i]['latitude'] <= 37.5):
-        #     m.add_to(n)
-        # elif (region == "AF") & (data.iloc[i]['longitude'] >= 10) & (data.iloc[i]['latitude'] >= -36) & (data.iloc[i]['longitude'] <= 58.5) & (data.iloc[i]['latitude'] <= -4):
-        #     m.add_to(n)
-        # elif (region=="AS") & (data.iloc[i]['longitude'] >= 26) & (data.iloc[i]['latitude'] >= 9) & (data.iloc[i]['longitude'] <= 180) & (data.iloc[i]['latitude'] <= 83.5):
-        #     m.add_to(n)
-        # elif (region=="AS") and (data.iloc[i]['longitude'] >= 54) and (data.iloc[i]['latitude'] >= 5.5) and (data.iloc[i]['longitude'] <= 102) and (data.iloc[i]['latitude'] <= 40):
-        #     m.add_to(n)
-        # elif (region=="AS") & (data.iloc[i]['longitude'] >= 88) & (data.iloc[i]['latitude'] >= -12) & (data.iloc[i]['longitude'] <= 163) & (data.iloc[i]['latitude'] <= 31):
-        #     m.add_to(n)
-        # elif (region=="OC") & (data.iloc[i]['longitude'] >= 110) & (data.iloc[i]['latitude'] >= -55) & (data.iloc[i]['longitude'] <= 180) & (data.iloc[i]['latitude'] <= -10):
-        #     m.add_to(n)
-    # n.show_in_browser()
+
     n.save("website/templates/map.html")
