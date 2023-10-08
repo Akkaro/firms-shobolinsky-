@@ -8,6 +8,7 @@ from website.auth import *
 import math
 from datetime import date
 from website.Database import *
+
 def get_date():
     return date.today()
 
@@ -63,6 +64,7 @@ def prepare_data(code,region):
     data_url='https://firms.modaps.eosdis.nasa.gov/api/country/csv/' + MAP_KEY + '/MODIS_NRT/'+code+'/2'
 
     # data_url=f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/{MAP_KEY}/MODIS_NRT/{code}/1"
+    db_list = GetDataFromDb()
     data=pd.read_csv(data_url)
 
     return data,region
@@ -133,16 +135,7 @@ def create_map(data,region):
                             </div>
                             <p>And that's a <a href="https://www.python-graph-gallery.com">link</a></p>
                             """
-        html2 = f"""
-                            <p>Fire detected by {data.iloc[i]['instrument']}</p>
-                            <ul>
-                                <li>Longitude: {data.iloc[i]['longitude']}</li>
-                                <li>Latitude: {data.iloc[i]['latitude']}</li>
-                                <li>Detection time: {data.iloc[i]['acq_date']}</li>
-                            </ul>
-                            </p>
-                            <p>And that's a <a href="https://www.python-graph-gallery.com">link</a></p>
-                            """
+                        
         if (data.iloc[i]['longitude'] >= longitude_min) & (data.iloc[i]['latitude']>=latitude_use_min) & (data.iloc[i]['longitude']<=longitude_max) & (data.iloc[i]['latitude']<=latitude_use_max):
             iframe = folium.IFrame(html=html1, width=200, height=200)
         else:

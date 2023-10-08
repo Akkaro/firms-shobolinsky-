@@ -2,6 +2,7 @@ from pymongo.mongo_client import MongoClient
 from pymongo import MongoClient
 import csv
 from mapping_tools.create_map import *
+from datetime import datetime
 
 # Let's set your map key that was emailed to you. It should look something like 'abcdef1234567890abcdef1234567890'
 MAP_KEY = 'b5b8459b6dd404d86ff6370540ec4fd7'
@@ -39,10 +40,18 @@ def add_user_report():
   longitude,latitude,CountryID = get_coordinates_and_country(get_ip())
   each = str(CountryID) + "," + str(longitude) + "," + str(latitude)
  
+  now = datetime.now()
+
+  current_time = now.strftime("%H:%M:%S")
+
+  current_date = now.strftime("%H:%M:%S")
+
   sample_dict = {
     "country_id": str(CountryID),
-    "latitude": str(longitude),
-    "longitude": str(latitude)
+    "latitude": str(latitude),
+    "longitude": str(longitude),
+    "acq_date": str(current_date),
+    "acq_time": str(current_time)
   }
 
   db.Update_Data.insert_one(sample_dict)

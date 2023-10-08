@@ -25,6 +25,8 @@ fire_kicsi = data.Minden #rovid
 
 fire = data.EarthData24H
 
+def GetSpecData():
+    print([fire for fire in user_data.find({"acq_date": "2023-10-07"})])
 
 
 def GetDataFromDb():
