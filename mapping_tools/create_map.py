@@ -10,11 +10,12 @@ from datetime import date
 def get_date():
     return date.today()
 
-def get_coordinates(ip_address):
+def get_coordinates_and_country(ip_address):
     region=get_region_by_ip(ip_address)
     latitude=region['latitude']
     longitude=region['longitude']
-    return (float)(longitude),(float)(latitude)
+    code,region=country_code_prep(region)
+    return (float)(longitude),(float)(latitude),code
 
 def get_ip():
     url="https://checkip.amazonaws.com"
