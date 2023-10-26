@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template, redirect
 
-import Database
+import website.Database
 from mapping_tools.create_map import *
 from website.api import add_user_report
 
-from Database import *
+from website.Database import *
 
 
 views = Blueprint('views', __name__)
@@ -27,10 +27,10 @@ def refress_db():
 
     return render_template("News.html", news=news_feed)
 
-@views.route('/News')
-def News():
+@views.route('/news')
+def news():
     news_feed = GetNewsFromDb()
-    return render_template("News.html", news=news_feed)
+    return render_template("news.html", news=news_feed)
 
 
 @views.route('/map')
