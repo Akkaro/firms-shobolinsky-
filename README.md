@@ -12,4 +12,4 @@ Balogh Flóra,
 Benő Ákos,
 Marton Szabolcs,
 Szilágy Botond,
-Vescan-Bakcsy Bernát-Kristóf,
+Vescan-Bakcsy Bernát-Kristóf
