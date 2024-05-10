@@ -8,8 +8,8 @@ The application has also a news feed, which diplays all of the current wildfire 
 A very important target of the project is raising social awareness. We tried to achieve this with a lot of visually interesting features, like informative slides or fire seafty prospect.
 
 The participants of the project are:
-Balogh Flóra
-Benő Ákos
-Marton Szabolcs
-Szilágy Botond
-Vescan-Bakcsy Bernát-Kristóf
+Balogh Flóra,
+Benő Ákos,
+Marton Szabolcs,
+Szilágy Botond,
+Vescan-Bakcsy Bernát-Kristóf,
